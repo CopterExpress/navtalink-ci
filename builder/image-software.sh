@@ -246,7 +246,7 @@ cd /home/pi/duocam-mavlink \
 echo_stamp "Build wifibroadcast"
 cd /home/pi/wifibroadcast \
 && git status \
-&& make -j4 \
+&& make -j4 all_bin \
 && python setup.py install \
 || (echo_stamp "Failed to build wifibroadcast!" "ERROR"; exit 1)
 
