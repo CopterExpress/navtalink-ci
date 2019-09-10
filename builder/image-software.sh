@@ -118,6 +118,7 @@ python-pyroute2 \
 python-future \
 python-configparser \
 python-all \
+libyaml-dev \
 && echo_stamp "Everything was installed!" "SUCCESS" \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
