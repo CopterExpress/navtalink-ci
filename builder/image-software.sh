@@ -145,10 +145,6 @@ cd /home/pi \
 && rm ./usbmount_0.0.24_all.deb \
 || (echo_stamp "Failed to install usbmount pymavlink!" "ERROR"; exit 1)
 
-echo_stamp "Check MAVLink repository status"
-cd /home/pi/mavlink && \
-git status
-
 echo_stamp "Build libcyaml"
 cd /home/pi/libcyaml \
 && git status \

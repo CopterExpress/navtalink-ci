@@ -88,6 +88,8 @@ ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/init_rp
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/hardware_setup.sh' '/root/'
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-init.sh' ${IMAGE_VERSION} ${SOURCE_IMAGE}
 
+# Copy libcyaml repository contents to the image
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${LIB_DIR}'/libcyaml' '/home/pi/libcyaml'
 # Copy yaml-cpp repository contents to the image
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${LIB_DIR}'/yaml-cpp' '/home/pi/yaml-cpp'
 # Copy spdlog repository contents to the image
