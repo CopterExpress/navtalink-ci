@@ -34,7 +34,7 @@ echo_stamp() {
 echo_stamp "#1 Write to /etc/wpa_supplicant/wpa_supplicant-wlan1.conf"
 
 # TODO: Use wpa_cli instead direct file edit
-cat << EOF >> /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
+cat << EOF >> /etc/wpa_supplicant/wpa_supplicant.conf
 network={
     ssid="NAVTALINK"
     psk="navtalinkwifi"
@@ -46,11 +46,12 @@ network={
     auth_alg=OPEN
 }
 EOF
+mv /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
 
 echo_stamp "#2 Write STATIC to /etc/dhcpcd.conf"
 
 cat << EOF >> /etc/dhcpcd.conf
-interface wlan0
+interface wlan1
 static ip_address=192.168.30.1/24
 EOF
 
