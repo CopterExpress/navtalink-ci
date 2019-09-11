@@ -15,7 +15,7 @@ fi
 
 while true
 do
-   read -p "This action will overwrite your existing configuration. Continue? [y/N]?" yn
+   read -p "This action will overwrite your existing configuration. Continue? [y/N]? " yn
    case $yn in
       [Yy]* )
          break
@@ -46,8 +46,9 @@ case "$1" in
       ;;
    "gs" )
       echo "Preparing GS configuration..."
+
       echo "Copy wifibroadcast configuration"
-      mv -f /home/pi/navtalink/wifibroadcast.cfg.gs /etc/wifibroadcast.cfg
+      mv -f /home/pi/navtalink/wifibroadcast.cfg.gs /etc/wifibroadcast.cfg \
       || (echo "Failed to copy wifibroadcast configuration!" "ERROR"; exit 3)
 
       echo "Enable GS services"
