@@ -50,8 +50,8 @@ LIB_DIR="${REPO_DIR}/lib"
 if [[ -z ${TRAVIS_TAG} ]]; then IMAGE_VERSION="$(cd ${REPO_DIR}; git log --format=%h -1)"; else IMAGE_VERSION="${TRAVIS_TAG}"; fi
 # IMAGE_VERSION="${TRAVIS_TAG:=$(cd ${REPO_DIR}; git log --format=%h -1)}"
 REPO_URL="$(cd ${REPO_DIR}; git remote --verbose | grep origin | grep fetch | cut -f2 | cut -d' ' -f1 | sed 's/git@github\.com\:/https\:\/\/github.com\//')"
-REPO_NAME="raw-wifi-link-ci-tx"
-IMAGE_NAME="raw-wifi-link-tx_${IMAGE_VERSION}.img"
+REPO_NAME="navtalink-ci"
+IMAGE_NAME="navtalink_${IMAGE_VERSION}.img"
 IMAGE_PATH="${IMAGES_DIR}/${IMAGE_NAME}"
 
 get_image() {
@@ -120,7 +120,7 @@ ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-network.
 # If RPi then use a one thread to build a ROS package on RPi, else use all
 [[ $(arch) == 'armv7l' ]] && NUMBER_THREADS=1 || NUMBER_THREADS=$(nproc --all)
 # Add rename script
-${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/tx_rename' '/usr/local/bin/tx_rename'
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/navtalink_rename' '/usr/local/bin/navtalink_rename'
 # Add set role script script
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/navtalink_set_role' '/usr/local/bin/navtalink_set_role'
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-validate.sh'
@@ -129,9 +129,9 @@ ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/v4l2loo
 # Update config for usbmode
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/usbmount.conf' '/etc/usbmount/usbmount.conf'
 # Copy config for mavlink-serial-bridge
-${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/mavlink-serial-bridge.conf' '/etc/mavlink-serial-bridge/uav.yaml'
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/mavlink-serial-bridge.yaml' '/etc/mavlink-serial-bridge/uav.yaml'
 # Copy config for mavlink-fast-switch
-${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/mavlink-fast-switch.conf' '/etc/mavlink-fast-switch/duocam-uav.yaml'
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/mavlink-fast-switch.yaml' '/etc/mavlink-fast-switch/duocam-uav.yaml'
 # Copy config for wifibroadcast
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/wifibroadcast.cfg.drone' '/home/pi/navtalink/wifibroadcast.cfg.drone'
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/wifibroadcast.cfg.gs' '/home/pi/navtalink/wifibroadcast.cfg.gs'

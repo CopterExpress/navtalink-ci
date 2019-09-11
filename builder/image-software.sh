@@ -118,6 +118,7 @@ python-pyroute2 \
 python-future \
 python-configparser \
 python-all \
+libyaml-dev \
 && echo_stamp "Everything was installed!" "SUCCESS" \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
@@ -245,7 +246,7 @@ cd /home/pi/duocam-mavlink \
 echo_stamp "Build wifibroadcast"
 cd /home/pi/wifibroadcast \
 && git status \
-&& make -j4 \
+&& make -j4 all_bin \
 && python setup.py install \
 || (echo_stamp "Failed to build wifibroadcast!" "ERROR"; exit 1)
 
