@@ -268,5 +268,7 @@ echo_stamp "Change default keyboard layout to US"
 sed -i 's/XKBLAYOUT="gb"/XKBLAYOUT="us"/g' /etc/default/keyboard
 
 echo_stamp "Enable services"
+systemctl enable wifibroadcast \
+|| (echo_stamp "Failed to enable services!" "ERROR"; exit 1)
 
 echo_stamp "End of software installation"

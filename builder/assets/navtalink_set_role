@@ -1,0 +1,64 @@
+#! /usr/bin/env bash
+
+#
+# Script for setting a role for NavTALink device.
+#
+# Copyright (C) 2019 Copter Express Technologies
+#
+# Author: Andrey Dvornikov <dvornikov-aa@yandex.ru>
+#
+
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 
+   exit 1
+fi
+
+while true
+do
+   read -p "This action will overwrite your existing configuration. Continue? [y/N]?" yn
+   case $yn in
+      [Yy]* )
+         break
+         ;;
+      [Nn]* )
+         exit
+         ;;
+      * )
+         exit
+         ;;
+   esac
+done
+
+case "$1" in
+   "uav" )
+      echo "Preparing UAV configuration..."
+
+      echo "Copy wifibroadcast configuration"
+      mv -f /home/pi/navtalink/wifibroadcast.cfg.drone /etc/wifibroadcast.cfg \
+      || (echo "Failed to copy wifibroadcast configuration!" "ERROR"; exit 3)
+
+      echo "Update UAV services"
+      systemctl disable wifibroadcast@gs \
+      && systemctl enable wifibroadcast@drone \
+      && systemctl enable mavlink-serial-bridge@uav \
+      && systemctl enable mavlink-fast-switch@duocam-uav \
+      || (echo "Failed to enable UAV services!" "ERROR"; exit 3)
+      ;;
+   "gs" )
+      echo "Preparing GS configuration..."
+      echo "Copy wifibroadcast configuration"
+      mv -f /home/pi/navtalink/wifibroadcast.cfg.gs /etc/wifibroadcast.cfg
+      || (echo "Failed to copy wifibroadcast configuration!" "ERROR"; exit 3)
+
+      echo "Enable GS services"
+      systemctl disable wifibroadcast@drone \
+      && systemctl disable mavlink-serial-bridge@uav \
+      && systemctl disable mavlink-fast-switch@duocam-uav \
+      && systemctl enable wifibroadcast@gs \
+      || (echo "Failed to enable GS services!" "ERROR"; exit 3)
+      ;;
+   * )
+      echo "Unknown NavTALink role!" "ERROR"
+      exit 2
+      ;;
+esac

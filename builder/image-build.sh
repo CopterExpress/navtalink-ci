@@ -121,10 +121,19 @@ ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-network.
 [[ $(arch) == 'armv7l' ]] && NUMBER_THREADS=1 || NUMBER_THREADS=$(nproc --all)
 # Add rename script
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/tx_rename' '/usr/local/bin/tx_rename'
+# Add set role script script
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/navtalink_set_role' '/usr/local/bin/navtalink_set_role'
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-validate.sh'
 # Add options v4l2loopback
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/v4l2loopback.conf' '/etc/modprobe.d/v4l2loopback.conf'
 # Update config for usbmode
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/usbmount.conf' '/etc/usbmount/usbmount.conf'
+# Copy config for mavlink-serial-bridge
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/mavlink-serial-bridge.conf' '/etc/mavlink-serial-bridge/uav.yaml'
+# Copy config for mavlink-fast-switch
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/mavlink-fast-switch.conf' '/etc/mavlink-fast-switch/duocam-uav.yaml'
+# Copy config for wifibroadcast
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/wifibroadcast.cfg.drone' '/home/pi/navtalink/wifibroadcast.cfg.drone'
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/wifibroadcast.cfg.gs' '/home/pi/navtalink/wifibroadcast.cfg.gs'
 
 ${BUILDER_DIR}/image-resize.sh ${IMAGE_PATH}

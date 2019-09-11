@@ -36,7 +36,7 @@ echo_stamp "#1 Write to /etc/wpa_supplicant/wpa_supplicant-wlan1.conf"
 # TODO: Use wpa_cli instead direct file edit
 cat << EOF >> /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
 network={
-    ssid="NavTALink"
+    ssid="NAVTALINK"
     psk="navtalinkwifi"
     mode=2
     proto=RSN
@@ -59,7 +59,7 @@ echo_stamp "#3 Write dhcp-config to /etc/dnsmasq.conf"
 cat << EOF >> /etc/dnsmasq.conf
 interface=wlan1
 address=/navtalink/192.168.30.1
-dhcp-range=192.168.30.100,192.168.30.200,12h
+dhcp-range=192.168.30.2,192.168.30.2,2m
 no-hosts
 filterwin2k
 bogus-priv

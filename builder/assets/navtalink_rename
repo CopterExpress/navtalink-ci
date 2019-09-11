@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Set NavTALink module hostname to the specified value
+# Set NavTALink device hostname to the specified value.
 
 set -e
 

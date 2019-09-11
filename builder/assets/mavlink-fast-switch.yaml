@@ -1,0 +1,19 @@
+# MAVLink endpoints
+endpoints:
+  # UAV endpoint
+  - name: "uav"
+    local:
+      port: 14588
+  # DuoCam MAVLink endpoint
+  - name: "duocam-mavlink"
+    remote:
+      ip: "127.0.0.1"
+      port: 14540
+  # GCS endpoint
+  - name: "gcs"
+    remote:
+      ip: "127.0.0.1"
+      port: 14550
+# Enable MAVLink ID table
+# HINT: Can't use this feature with duocam
+id-table: False

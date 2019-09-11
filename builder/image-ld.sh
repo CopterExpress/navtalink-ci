@@ -9,10 +9,10 @@
 #
 
 case "$1" in
- "disable" )
-    mv /etc/ld.so.preload /etc/ld.so.preload.bak
-    ;;
- "enable" )
-    mv /etc/ld.so.preload.bak /etc/ld.so.preload
-    ;;
+   "disable" )
+      mv /etc/ld.so.preload /etc/ld.so.preload.bak
+      ;;
+   "enable" )
+      mv /etc/ld.so.preload.bak /etc/ld.so.preload
+      ;;
 esac
