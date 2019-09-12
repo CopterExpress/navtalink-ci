@@ -121,8 +121,10 @@ ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-network.
 [[ $(arch) == 'armv7l' ]] && NUMBER_THREADS=1 || NUMBER_THREADS=$(nproc --all)
 # Add rename script
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/navtalink_rename' '/usr/local/bin/navtalink_rename'
-# Add set role script script
+# Add set role script
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/navtalink_set_role' '/usr/local/bin/navtalink_set_role'
+# Add update adapter script
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/navtalink_update_adapter' '/usr/local/bin/navtalink_update_adapter'
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-validate.sh'
 # Add options v4l2loopback
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/v4l2loopback.conf' '/etc/modprobe.d/v4l2loopback.conf'

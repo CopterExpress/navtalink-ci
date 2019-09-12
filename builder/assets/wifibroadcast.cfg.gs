@@ -5,8 +5,8 @@ wifi_channel = 161     # 161 -- radio channel @5825 MHz, range: 5815–5835 MHz,
 wifi_region = 'BO'     # Your country for CRDA (use BO or GY if you want max tx power)
 
 [gs_mavlink]
-# peer = 'connect://127.0.0.1:14550'  # outgoing connection
-peer = 'listen://0.0.0.0:14590'       # incoming connection
+peer = 'connect://192.168.30.2:14550'  # outgoing connection
+# peer = 'listen://0.0.0.0:14550'       # incoming connection
 
 [gs_video]
 peer = 'connect://192.168.30.2:5600'  # outgoing connection for
