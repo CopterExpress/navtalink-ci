@@ -139,124 +139,165 @@ rm get-pip.py
 echo_stamp "Make sure both pip is installed"
 pip --version
 
-echo_stamp "Install usbmount"
-cd /home/pi \
-&& wget https://github.com/nicokaiser/usbmount/releases/download/0.0.24/usbmount_0.0.24_all.deb \
-&& apt install --no-install-recommends -y ./usbmount_0.0.24_all.deb \
-&& rm ./usbmount_0.0.24_all.deb \
-|| (echo_stamp "Failed to install usbmount pymavlink!" "ERROR"; exit 1)
+# echo_stamp "Install usbmount"
+# cd /home/pi \
+# && wget https://github.com/nicokaiser/usbmount/releases/download/0.0.24/usbmount_0.0.24_all.deb \
+# && apt install --no-install-recommends -y ./usbmount_0.0.24_all.deb \
+# && rm ./usbmount_0.0.24_all.deb \
+# || (echo_stamp "Failed to install usbmount pymavlink!" "ERROR"; exit 1)
 
-echo_stamp "Build libcyaml"
-cd /home/pi/libcyaml \
-&& git status \
-&& make -j4 \
-&& make install \
-|| (echo_stamp "Failed to build libcyaml!" "ERROR"; exit 1)
+# echo_stamp "Build libcyaml"
+# cd /home/pi/libcyaml \
+# && git status \
+# && make -j4 \
+# && make install \
+# || (echo_stamp "Failed to build libcyaml!" "ERROR"; exit 1)
 
-echo_stamp "Build spdlog"
-cd /home/pi/spdlog \
-&& git status \
-&& mkdir build \
-&& cd build \
-&& cmake -DSPDLOG_BUILD_BENCH=OFF -DSPDLOG_BUILD_TESTS=OFF .. \
-&& make -j4 \
-&& make install \
-|| (echo_stamp "Failed to build spdlog!" "ERROR"; exit 1)
+# echo_stamp "Build spdlog"
+# cd /home/pi/spdlog \
+# && git status \
+# && mkdir build \
+# && cd build \
+# && cmake -DSPDLOG_BUILD_BENCH=OFF -DSPDLOG_BUILD_TESTS=OFF .. \
+# && make -j4 \
+# && make install \
+# || (echo_stamp "Failed to build spdlog!" "ERROR"; exit 1)
 
-echo_stamp "Build yaml-cpp"
-cd /home/pi/yaml-cpp \
-&& git status \
-&& mkdir build \
-&& cd build \
-&& cmake -DYAML_CPP_BUILD_TESTS=OFF .. \
-&& make -j4 \
-&& make install \
-|| (echo_stamp "Failed to build yaml-cpp!" "ERROR"; exit 1)
+# echo_stamp "Build yaml-cpp"
+# cd /home/pi/yaml-cpp \
+# && git status \
+# && mkdir build \
+# && cd build \
+# && cmake -DYAML_CPP_BUILD_TESTS=OFF .. \
+# && make -j4 \
+# && make install \
+# || (echo_stamp "Failed to build yaml-cpp!" "ERROR"; exit 1)
 
-echo_stamp "Build cxxopts"
-cd /home/pi/cxxopts \
-&& git status \
-&& mkdir build \
-&& cd build \
-&& cmake -DCXXOPTS_BUILD_EXAMPLES=OFF -DCXXOPTS_BUILD_TESTS=OFF .. \
-&& make -j4 \
-&& make install \
-|| (echo_stamp "Failed to build cxxopts!" "ERROR"; exit 1)
+# echo_stamp "Build cxxopts"
+# cd /home/pi/cxxopts \
+# && git status \
+# && mkdir build \
+# && cd build \
+# && cmake -DCXXOPTS_BUILD_EXAMPLES=OFF -DCXXOPTS_BUILD_TESTS=OFF .. \
+# && make -j4 \
+# && make install \
+# || (echo_stamp "Failed to build cxxopts!" "ERROR"; exit 1)
 
-echo_stamp "Build libseek-thermal"
-cd /home/pi/libseek-thermal \
-&& git status \
-&& mkdir build \
-&& cd build \
-&& cmake .. \
-&& make -j4 \
-&& make install \
-|| (echo_stamp "Failed to build libseek-thermal!" "ERROR"; exit 1)
+# echo_stamp "Build libseek-thermal"
+# cd /home/pi/libseek-thermal \
+# && git status \
+# && mkdir build \
+# && cd build \
+# && cmake .. \
+# && make -j4 \
+# && make install \
+# || (echo_stamp "Failed to build libseek-thermal!" "ERROR"; exit 1)
 
-echo_stamp "Build raspicam"
-cd /home/pi/raspicam \
-&& git status \
-&& mkdir build \
-&& cd build \
-&& cmake .. \
-&& make -j4 \
-&& make install \
-|| (echo_stamp "Failed to build raspicam!" "ERROR"; exit 1)
+# echo_stamp "Build raspicam"
+# cd /home/pi/raspicam \
+# && git status \
+# && mkdir build \
+# && cd build \
+# && cmake .. \
+# && make -j4 \
+# && make install \
+# || (echo_stamp "Failed to build raspicam!" "ERROR"; exit 1)
 
-echo_stamp "Build mavlink-fast-switch"
-cd /home/pi/mavlink-fast-switch \
-&& git status \
-&& mkdir build \
-&& cd build \
-&& cmake .. \
-&& make -j4 \
-&& make install \
-|| (echo_stamp "Failed to build mavlink-fast-switch!" "ERROR"; exit 1)
+# echo_stamp "Build mavlink-fast-switch"
+# cd /home/pi/mavlink-fast-switch \
+# && git status \
+# && mkdir build \
+# && cd build \
+# && cmake .. \
+# && make -j4 \
+# && make install \
+# || (echo_stamp "Failed to build mavlink-fast-switch!" "ERROR"; exit 1)
 
-echo_stamp "Build mavlink-serial-bridge"
-cd /home/pi/mavlink-serial-bridge \
-&& git status \
-&& mkdir build \
-&& cd build \
-&& cmake .. \
-&& make -j4 \
-&& make install \
-|| (echo_stamp "Failed to build mavlink-serial-bridge!" "ERROR"; exit 1)
+# echo_stamp "Build mavlink-serial-bridge"
+# cd /home/pi/mavlink-serial-bridge \
+# && git status \
+# && mkdir build \
+# && cd build \
+# && cmake .. \
+# && make -j4 \
+# && make install \
+# || (echo_stamp "Failed to build mavlink-serial-bridge!" "ERROR"; exit 1)
 
-echo_stamp "Build duocam-camera"
-cd /home/pi/duocam-camera \
-&& git status \
-&& mkdir build \
-&& cd build \
-&& cmake .. \
-&& make -j4 \
-&& make install \
-|| (echo_stamp "Failed to build duocam-camera!" "ERROR"; exit 1)
+# echo_stamp "Build duocam-camera"
+# cd /home/pi/duocam-camera \
+# && git status \
+# && mkdir build \
+# && cd build \
+# && cmake .. \
+# && make -j4 \
+# && make install \
+# || (echo_stamp "Failed to build duocam-camera!" "ERROR"; exit 1)
 
-echo_stamp "Build duocam-mavlink"
-cd /home/pi/duocam-mavlink \
-&& git status \
-&& mkdir build \
-&& cd build \
-&& cmake -DNO_EXAMPLES=ON .. \
-&& make -j4 \
-&& make install \
-|| (echo_stamp "Failed to build duocam-mavlink!" "ERROR"; exit 1)
+# echo_stamp "Build duocam-mavlink"
+# cd /home/pi/duocam-mavlink \
+# && git status \
+# && mkdir build \
+# && cd build \
+# && cmake -DNO_EXAMPLES=ON .. \
+# && make -j4 \
+# && make install \
+# || (echo_stamp "Failed to build duocam-mavlink!" "ERROR"; exit 1)
 
-echo_stamp "Build wifibroadcast"
-cd /home/pi/wifibroadcast \
-&& git status \
-&& make -j4 all_bin \
-&& python setup.py install \
-|| (echo_stamp "Failed to build wifibroadcast!" "ERROR"; exit 1)
+# echo_stamp "Build wifibroadcast"
+# cd /home/pi/wifibroadcast \
+# && git status \
+# && make -j4 all_bin \
+# && python setup.py install \
+# || (echo_stamp "Failed to build wifibroadcast!" "ERROR"; exit 1)
+
+# ./dkms-install.sh fails in chroot environment. We have to perform build and install
+# steps manually with kernels installed in the target system.
+echo_stamp "Build rtl8812au"
+cd /home/pi/rtl8812au && \
+git status
+
+DRV_DIR=$(grep -Po "DRV_DIR=\K([a-z0-9]+)" ./dkms-install.sh) \
+|| (echo_stamp "Failed to extract DRV_DIR!" "ERROR"; exit 1)
+echo_stamp "DRV_DIR=$DRV_DIR"
+
+DRV_NAME=$(grep -Po "DRV_NAME=\K([a-z0-9]+)" ./dkms-install.sh) \
+|| (echo_stamp "Failed to extract DRV_NAME!" "ERROR"; exit 1)
+echo_stamp "DRV_NAME=$DRV_NAME"
+
+DRV_VERSION=$(grep -Po "DRV_VERSION=\K([0-9.]+)" ./dkms-install.sh) \
+|| (echo_stamp "Failed to extract DRV_VERSION!" "ERROR"; exit 1)
+echo_stamp "DRV_VERSION=$DRV_VERSION"
+
+cp -r $(pwd) /usr/src/${DRV_NAME}-${DRV_VERSION} \
+|| (echo_stamp "Failed to create a symlink for the rtl8812au DKMS module!" "ERROR"; exit 1)
+
+dkms add -m ${DRV_NAME} -v ${DRV_VERSION} \
+|| (echo_stamp "Failed to add the rtl8812au DKMS module!" "ERROR"; exit 1)
+
+linux_headers=($(ls -1a /usr/src | grep -Po "linux-headers-\K([a-z0-9.=+-]+)")) \
+|| (echo_stamp "Failed to retrieve target system kernels!" "ERROR"; exit 1)
+for i in "${linux_headers[@]}"
+do
+  dkms build -m ${DRV_NAME} -v ${DRV_VERSION} -k "$i" \
+  || (echo_stamp "Failed to build rtl8812au for kernel $i!" "ERROR"; exit 1)
+  dkms install -m ${DRV_NAME} -v ${DRV_VERSION} -k "$i" \
+  || (echo_stamp "Failed to install rtl8812au for kernel $i!" "ERROR"; exit 1)
+done
+
+cat << EOF >> /etc/sysctl.conf
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+EOF
 
 echo_stamp "Reconfigure shared objects"
 ldconfig \
 || (echo_stamp "Failed to reconfigure shared objects!" "ERROR"; exit 1)
 
-echo_stamp "Register v4l2loopback kernel module"
+echo_stamp "Register kernel modules"
 echo "v4l2loopback" >> /etc/modules \
-|| (echo_stamp "Failed to register v4l2loopback kernel module!" "ERROR"; exit 1)
+&& echo "88XXau" >> /etc/modules \
+|| (echo_stamp "Failed to register kernel modules!" "ERROR"; exit 1)
 
 echo_stamp "Add .vimrc"
 cat << EOF > /home/pi/.vimrc
@@ -270,7 +311,6 @@ sed -i 's/XKBLAYOUT="gb"/XKBLAYOUT="us"/g' /etc/default/keyboard
 
 echo_stamp "Configure services"
 systemctl enable wifibroadcast \
-&& systemctl disable console-setup \
 || (echo_stamp "Failed to configure services!" "ERROR"; exit 1)
 
 echo_stamp "End of software installation"
