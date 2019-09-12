@@ -8,6 +8,8 @@
 # Author: Andrey Dvornikov <dvornikov-aa@yandex.ru>
 #
 
+set -e # Exit immidiately on non-zero result
+
 if [[ $EUID -ne 0 ]]; then
    echo "This script must be run as root" 
    exit 1
@@ -30,36 +32,36 @@ do
 done
 
 case "$1" in
-   "uav" )
-      echo "Preparing UAV configuration..."
+   "drone" )
+      echo "Preparing drone configuration..."
 
       echo "Copy wifibroadcast configuration"
-      mv -f /home/pi/navtalink/wifibroadcast.cfg.drone /etc/wifibroadcast.cfg \
-      || (echo "Failed to copy wifibroadcast configuration!" "ERROR"; exit 3)
+      cp -f /home/pi/navtalink/wifibroadcast.cfg.drone /etc/wifibroadcast.cfg \
+      || (echo "Failed to copy wifibroadcast configuration!"; exit 3)
 
-      echo "Update UAV services"
+      echo "Update drone services"
       systemctl disable wifibroadcast@gs \
       && systemctl enable wifibroadcast@drone \
-      && systemctl enable mavlink-serial-bridge@uav \
-      && systemctl enable mavlink-fast-switch@duocam-uav \
-      || (echo "Failed to enable UAV services!" "ERROR"; exit 3)
+      && systemctl enable mavlink-serial-bridge@drone \
+      && systemctl enable mavlink-fast-switch@duocam-drone \
+      || (echo "Failed to enable drone services!"; exit 3)
       ;;
    "gs" )
       echo "Preparing GS configuration..."
 
       echo "Copy wifibroadcast configuration"
-      mv -f /home/pi/navtalink/wifibroadcast.cfg.gs /etc/wifibroadcast.cfg \
-      || (echo "Failed to copy wifibroadcast configuration!" "ERROR"; exit 3)
+      cp -f /home/pi/navtalink/wifibroadcast.cfg.gs /etc/wifibroadcast.cfg \
+      || (echo "Failed to copy wifibroadcast configuration!"; exit 3)
 
       echo "Enable GS services"
       systemctl disable wifibroadcast@drone \
-      && systemctl disable mavlink-serial-bridge@uav \
-      && systemctl disable mavlink-fast-switch@duocam-uav \
+      && systemctl disable mavlink-serial-bridge@drone \
+      && systemctl disable mavlink-fast-switch@duocam-drone \
       && systemctl enable wifibroadcast@gs \
-      || (echo "Failed to enable GS services!" "ERROR"; exit 3)
+      || (echo "Failed to enable GS services!"; exit 3)
       ;;
    * )
-      echo "Unknown NavTALink role!" "ERROR"
+      echo "Unknown NavTALink role!"
       exit 2
       ;;
 esac

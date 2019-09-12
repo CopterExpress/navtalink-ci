@@ -129,9 +129,9 @@ ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/v4l2loo
 # Update config for usbmode
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/usbmount.conf' '/etc/usbmount/usbmount.conf'
 # Copy config for mavlink-serial-bridge
-${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/mavlink-serial-bridge.yaml' '/etc/mavlink-serial-bridge/uav.yaml'
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/mavlink-serial-bridge.yaml' '/etc/mavlink-serial-bridge/drone.yaml'
 # Copy config for mavlink-fast-switch
-${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/mavlink-fast-switch.yaml' '/etc/mavlink-fast-switch/duocam-uav.yaml'
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/mavlink-fast-switch.yaml' '/etc/mavlink-fast-switch/duocam-drone.yaml'
 # Copy config for wifibroadcast
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/wifibroadcast.cfg.drone' '/home/pi/navtalink/wifibroadcast.cfg.drone'
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/wifibroadcast.cfg.gs' '/home/pi/navtalink/wifibroadcast.cfg.gs'
