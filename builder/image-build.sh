@@ -125,6 +125,12 @@ ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/navtali
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/navtalink_set_role' '/usr/local/bin/navtalink_set_role'
 # Add update adapter script
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/navtalink_update_adapter' '/usr/local/bin/navtalink_update_adapter'
+# Add video stream script
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/navtalink_video' '/usr/local/bin/navtalink_video'
+# Add video stream environment file
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/navtalink-video.env' '/lib/systemctl/system/navtalink-video.env'
+# Add video stream service file
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/navtalink-video.service' '/lib/systemctl/system/navtalink-video.service'
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-validate.sh'
 # Add options v4l2loopback
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/v4l2loopback.conf' '/etc/modprobe.d/v4l2loopback.conf'

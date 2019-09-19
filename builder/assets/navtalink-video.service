@@ -1,0 +1,10 @@
+[Unit]
+Description=Video stream to wifibroadcast
+
+[Service]
+EnvironmentFile=/lib/systemd/system/navtalink-video.env
+Type=simple
+ExecStart=/usr/local/bin/navtalink_video    
+Restart=on-failure
+RestartSec=5s
+Nice=-19

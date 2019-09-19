@@ -151,6 +151,8 @@ cd /home/pi/libcyaml \
 && git status \
 && make -j4 \
 && make install \
+&& cd .. \
+&& rm -r libcyaml \
 || (echo_stamp "Failed to build libcyaml!" "ERROR"; exit 1)
 
 echo_stamp "Build spdlog"
@@ -161,6 +163,8 @@ cd /home/pi/spdlog \
 && cmake -DSPDLOG_BUILD_BENCH=OFF -DSPDLOG_BUILD_TESTS=OFF .. \
 && make -j4 \
 && make install \
+&& cd ../.. \
+&& rm -r spdlog \
 || (echo_stamp "Failed to build spdlog!" "ERROR"; exit 1)
 
 echo_stamp "Build yaml-cpp"
@@ -171,6 +175,8 @@ cd /home/pi/yaml-cpp \
 && cmake -DYAML_CPP_BUILD_TESTS=OFF .. \
 && make -j4 \
 && make install \
+&& cd ../.. \
+&& rm -r yaml-cpp \
 || (echo_stamp "Failed to build yaml-cpp!" "ERROR"; exit 1)
 
 echo_stamp "Build cxxopts"
@@ -181,6 +187,8 @@ cd /home/pi/cxxopts \
 && cmake -DCXXOPTS_BUILD_EXAMPLES=OFF -DCXXOPTS_BUILD_TESTS=OFF .. \
 && make -j4 \
 && make install \
+&& cd ../.. \
+&& rm -r cxxopts \
 || (echo_stamp "Failed to build cxxopts!" "ERROR"; exit 1)
 
 echo_stamp "Build libseek-thermal"
@@ -191,6 +199,8 @@ cd /home/pi/libseek-thermal \
 && cmake .. \
 && make -j4 \
 && make install \
+&& cd ../.. \
+&& rm -r libseek-thermal \
 || (echo_stamp "Failed to build libseek-thermal!" "ERROR"; exit 1)
 
 echo_stamp "Build raspicam"
@@ -201,6 +211,8 @@ cd /home/pi/raspicam \
 && cmake .. \
 && make -j4 \
 && make install \
+&& cd ../.. \
+&& rm -r raspicam \
 || (echo_stamp "Failed to build raspicam!" "ERROR"; exit 1)
 
 echo_stamp "Build mavlink-fast-switch"
@@ -248,6 +260,8 @@ cd /home/pi/wifibroadcast \
 && git status \
 && make -j4 all_bin \
 && python setup.py install \
+&& cd .. \
+&& rm -r wifibroadcast \
 || (echo_stamp "Failed to build wifibroadcast!" "ERROR"; exit 1)
 
 # ./dkms-install.sh fails in chroot environment. We have to perform build and install
@@ -289,6 +303,10 @@ net.ipv6.conf.all.disable_ipv6 = 1
 net.ipv6.conf.default.disable_ipv6 = 1
 net.ipv6.conf.lo.disable_ipv6 = 1
 EOF
+
+cd .. \
+&& rm -r rtl8812au \
+|| (echo_stamp "Failed to remove rtl8812au sources!" "ERROR"; exit 1)
 
 echo_stamp "Reconfigure shared objects"
 ldconfig \

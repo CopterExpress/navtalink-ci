@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [[ "$#" != "0" ]]; then
+  echo "Invalid arguments!"
+  exit 1
+fi
+
+if [[ -z "${VIDEO_WIDTH}" ]]; then
+  echo "Run this script only with the environment from navtalink-video.env!"
+  exit 1
+fi
+
+set -e
+
+/usr/bin/gst-launch-1.0 -v v4l2src device=/dev/video1 ! videoconvert ! \
+"video/x-raw,width=$VIDEO_WIDTH,height=$VIDEO_HEIGHT,framerate=$VIDEO_FRAMERATE" ! omxh264enc target-bitrate="$TARGET_BITRATE" control-rate=1 ! \
+ 'video/x-h264,profile=high' ! h264parse ! rtph264pay ! udpsink host=127.0.0.1 port=5602

@@ -42,6 +42,7 @@ case "$1" in
       echo "Update drone services"
       systemctl disable wifibroadcast@gs \
       && systemctl enable wifibroadcast@drone \
+      && systemctl enable navtalink-video \
       && systemctl enable mavlink-serial-bridge@drone \
       && systemctl enable mavlink-fast-switch@duocam-drone \
       || (echo "Failed to enable drone services!"; exit 1)
@@ -55,6 +56,7 @@ case "$1" in
 
       echo "Enable GS services"
       systemctl disable wifibroadcast@drone \
+      && systemctl disable navtalink-video \
       && systemctl disable mavlink-serial-bridge@drone \
       && systemctl disable mavlink-fast-switch@duocam-drone \
       && systemctl enable wifibroadcast@gs \
