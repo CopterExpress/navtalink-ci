@@ -61,12 +61,12 @@ echo_stamp "#6 Enable predictable network interface names"
 /usr/bin/raspi-config nonint do_net_names 0
 
 # 7. Enable hardware UART
-# echo_stamp "#7 Turn on UART"
+echo_stamp "#7 Turn on UART"
 # Temporary solution
 # https://github.com/RPi-Distro/raspi-config/pull/75
-# /usr/bin/raspi-config nonint do_serial 1
-# /usr/bin/raspi-config nonint set_config_var enable_uart 1 /boot/config.txt
-#/usr/bin/raspi-config nonint set_config_var dtoverlay pi3-disable-bt /boot/config.txt
+/usr/bin/raspi-config nonint do_serial 1
+/usr/bin/raspi-config nonint set_config_var enable_uart 1 /boot/config.txt
+/usr/bin/raspi-config nonint set_config_var dtoverlay pi3-disable-bt /boot/config.txt
 systemctl disable hciuart.service
 
 # After adding to Raspbian OS

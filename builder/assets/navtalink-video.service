@@ -8,3 +8,6 @@ ExecStart=/usr/local/bin/navtalink_video
 Restart=on-failure
 RestartSec=5s
 Nice=-19
+
+[Install]
+WantedBy=multi-user.target
