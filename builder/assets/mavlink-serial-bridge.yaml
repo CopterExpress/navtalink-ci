@@ -1,7 +1,7 @@
 # Serial device settings
 serial:
   # Device file
-  device: "/dev/ttyS0"
+  device: "/dev/ttyAMA0"
   # Baudrate
   baudrate: 57600
   # Flow control (hardware, none)
