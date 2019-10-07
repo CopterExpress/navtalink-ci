@@ -331,4 +331,14 @@ echo_stamp "Configure services"
 systemctl enable wifibroadcast \
 || (echo_stamp "Failed to configure services!" "ERROR"; exit 1)
 
+echo_stamp "Move the most frequently used configs to the boot partition"
+mv /etc/duocam/mavlink.yaml /boot/duocam-mavlink.txt \
+&& mv /etc/duocam/camera.yaml /boot/duocam-camera.txt \
+&& mv /lib/systemd/system/navtalink-video.env /boot/navtalink-video.txt \
+&& ln -s /boot/wifibroadcast.txt /etc/wifibroadcast.cfg \
+&& ln -s /boot/duocam-mavlink.txt /etc/duocam/mavlink.yaml \
+&& ln -s /boot/duocam-camera.txt /etc/duocam/camera.yaml \
+&& ln -s /boot/navtalink-video.txt /lib/systemd/system/navtalink-video.env \
+|| (echo_stamp "Failed to move configuration files!" "ERROR"; exit 1)
+
 echo_stamp "End of software installation"

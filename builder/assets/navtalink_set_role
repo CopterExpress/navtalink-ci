@@ -36,7 +36,7 @@ case "$1" in
       echo "Preparing drone configuration..."
 
       echo "Copy wifibroadcast configuration"
-      cp -f /home/pi/navtalink/wifibroadcast.cfg.drone /etc/wifibroadcast.cfg \
+      cp -f /home/pi/navtalink/wifibroadcast.cfg.drone /boot/wifibroadcast.txt \
       || (echo "Failed to copy wifibroadcast configuration!"; exit 1)
 
       echo "Update drone services"
@@ -51,7 +51,7 @@ case "$1" in
       echo "Preparing GS configuration..."
 
       echo "Copy wifibroadcast configuration"
-      cp -f /home/pi/navtalink/wifibroadcast.cfg.gs /etc/wifibroadcast.cfg \
+      cp -f /home/pi/navtalink/wifibroadcast.cfg.gs /boot/wifibroadcast.txt \
       || (echo "Failed to copy wifibroadcast configuration!"; exit 1)
 
       echo "Enable GS services"
