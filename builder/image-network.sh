@@ -31,7 +31,7 @@ echo_stamp() {
   echo -e ${TEXT}
 }
 
-echo_stamp "#1 Write to /etc/wpa_supplicant/wpa_supplicant-wlan1.conf"
+echo_stamp "#1 Write to /etc/wpa_supplicant/wpa_supplicant.conf"
 
 # TODO: Use wpa_cli instead direct file edit
 cat << EOF >> /etc/wpa_supplicant/wpa_supplicant.conf
@@ -46,16 +46,23 @@ network={
     auth_alg=OPEN
 }
 EOF
-mv /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
+mv /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
 
-echo_stamp "#2 Write STATIC to /etc/dhcpcd.conf"
+# WARNING: Internal WiFi adapter doesn't follow predictable interface naming rule and can change its number
+echo_stamp "#2 Create symlinks to /etc/wpa_supplicant/wpa_supplicant-wlan0.conf"
+ln -s /etc/wpa_supplicant/wpa_supplicant-wlan0.conf /etc/wpa_supplicant/wpa_supplicant-wlan1.conf \
+&& ln -s /etc/wpa_supplicant/wpa_supplicant-wlan0.conf /etc/wpa_supplicant/wpa_supplicant-wlan2.conf \
+&& ln -s /etc/wpa_supplicant/wpa_supplicant-wlan0.conf /etc/wpa_supplicant/wpa_supplicant-wlan3.conf \
+|| (echo_stamp "Failed to create symlinks!" "ERROR"; exit 1)
+
+echo_stamp "#3 Write STATIC to /etc/dhcpcd.conf"
 
 cat << EOF >> /etc/dhcpcd.conf
 interface wlan1
 static ip_address=192.168.30.1/24
 EOF
 
-echo_stamp "#3 Write dhcp-config to /etc/dnsmasq.conf"
+echo_stamp "#4 Write dhcp-config to /etc/dnsmasq.conf"
 
 cat << EOF >> /etc/dnsmasq.conf
 interface=wlan1

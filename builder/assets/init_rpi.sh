@@ -34,7 +34,7 @@ echo_stamp() {
 
 echo_stamp "Rename SSID"
 NEW_SSID='NAVTALINK-'$(head -c 100 /dev/urandom | xxd -ps -c 100 | sed -e "s/[^0-9]//g" | cut -c 1-4)
-sudo sed -i.OLD "s/NAVTALINK/${NEW_SSID}/" /etc/wpa_supplicant/wpa_supplicant-wlan1.conf
+sudo sed -i.OLD "s/NAVTALINK/${NEW_SSID}/" /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
 navtalink_rename ${NEW_SSID}
 
 echo_stamp "Harware setup"
