@@ -58,14 +58,23 @@ ln -s /etc/wpa_supplicant/wpa_supplicant-wlan0.conf /etc/wpa_supplicant/wpa_supp
 echo_stamp "#3 Write STATIC to /etc/dhcpcd.conf"
 
 cat << EOF >> /etc/dhcpcd.conf
+interface wlan0
+static ip_address=192.168.30.1/24
 interface wlan1
+static ip_address=192.168.30.1/24
+interface wlan2
+static ip_address=192.168.30.1/24
+interface wlan3
 static ip_address=192.168.30.1/24
 EOF
 
 echo_stamp "#4 Write dhcp-config to /etc/dnsmasq.conf"
 
 cat << EOF >> /etc/dnsmasq.conf
+interface=wlan0
 interface=wlan1
+interface=wlan2
+interface=wlan3
 address=/navtalink/192.168.30.1
 dhcp-range=192.168.30.2,192.168.30.2,2m
 no-hosts
