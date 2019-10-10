@@ -33,7 +33,7 @@ echo_stamp() {
 
 echo_stamp "Write NavTALink information"
 
-# COEX charging station image version
+# NavTALink image version
 echo "$1" >> /etc/navtalink
 # Origin image file name
 echo "${2%.*}" >> /etc/navtalink
