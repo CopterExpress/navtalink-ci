@@ -77,7 +77,7 @@ get_image ${IMAGE_PATH} ${SOURCE_IMAGE}
 # Make free space
 ${BUILDER_DIR}/image-resize.sh ${IMAGE_PATH} max '7G'
 
-# Temporary disable ld.so
+# Temporary disable ld.so.preload
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-ld.sh' disable
 
 # Copy cloned repository to the image
@@ -131,7 +131,7 @@ ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-network.
 
 # If RPi then use a one thread to build a ROS package on RPi, else use all
 [[ $(arch) == 'armv7l' ]] && NUMBER_THREADS=1 || NUMBER_THREADS=$(nproc --all)
-${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-validate.sh'
+
 # Add options v4l2loopback
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/v4l2loopback.conf' '/etc/modprobe.d/v4l2loopback.conf'
 # Update config for usbmode
@@ -143,5 +143,10 @@ ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/mavlink
 # Copy config for wifibroadcast
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/wifibroadcast.cfg.drone' '/home/pi/navtalink/wifibroadcast.cfg.drone'
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/wifibroadcast.cfg.gs' '/home/pi/navtalink/wifibroadcast.cfg.gs'
+
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-validate.sh'
+
+# Enable disable ld.so.preload
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-ld.sh' enable
 
 ${BUILDER_DIR}/image-resize.sh ${IMAGE_PATH}
