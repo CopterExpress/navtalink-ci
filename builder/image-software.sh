@@ -262,6 +262,7 @@ cd /home/pi/wifibroadcast \
 && python setup.py install \
 && cd .. \
 && rm -r wifibroadcast \
+&& sed -i "s/^\(WFB_NICS=\"\).*$/\1\"/" /etc/default/wifibroadcast \
 || (echo_stamp "Failed to build wifibroadcast!" "ERROR"; exit 1)
 
 # ./dkms-install.sh fails in chroot environment. We have to perform build and install

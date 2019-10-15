@@ -73,4 +73,8 @@ systemctl disable hciuart.service
 # https://github.com/RPi-Distro/raspi-config/commit/d6d9ecc0d9cbe4aaa9744ae733b9cb239e79c116
 #/usr/bin/raspi-config nonint do_serial 2
 
-echo_stamp "#8 End of configure hardware interfaces"
+# 8. Disable waiting for network
+echo_stamp "#8 Disable waiting for network"
+/usr/bin/raspi-config nonint do_boot_wait 1
+
+echo_stamp "#10 End of configure hardware interfaces"

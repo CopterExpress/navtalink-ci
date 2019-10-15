@@ -32,7 +32,13 @@ esac
 internal_wifi_re="wlan[[:digit:]]+"
 if [[ ${wifi_adapters[0]} =~ $internal_wifi_re ]]
 then
-    wifi_adapter=${wifi_adapters[1]}
+    if [[ ${wifi_adapters[1]} =~ $internal_wifi_re ]]
+    then
+        echo "None of interfaces have a predictable name!"
+        exit 1
+    else
+        wifi_adapter=${wifi_adapters[1]}
+    fi
 else
     wifi_adapter=${wifi_adapters[0]}
 fi
