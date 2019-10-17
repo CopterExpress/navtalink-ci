@@ -34,9 +34,9 @@ echo_stamp() {
 echo_stamp "Write NavTALink information"
 
 # NavTALink image version
-echo "$1" >> /etc/navtalink
+echo "$1" >> /etc/navtalink_version
 # Origin image file name
-echo "${2%.*}" >> /etc/navtalink
+echo "${2%.*}" >> /etc/navtalink_origin
 
 echo_stamp "Write magic script to /etc/rc.local"
 MAGIC_SCRIPT="sudo /root/init_rpi.sh; sudo sed -i '/sudo \\\/root\\\/init_rpi.sh/d' /etc/rc.local && sudo reboot"
