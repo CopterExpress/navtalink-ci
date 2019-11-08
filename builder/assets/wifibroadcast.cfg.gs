@@ -3,6 +3,7 @@ wifi_channel = 161     # 161 -- radio channel @5825 MHz, range: 5815–5835 MHz,
                        # 1 -- radio channel @2412 Mhz, 
                        # see https://en.wikipedia.org/wiki/List_of_WLAN_channels for reference
 wifi_region = 'BO'     # Your country for CRDA (use BO or GY if you want max tx power)
+mavlink_agg_timeout = 0.001
 
 [gs_mavlink]
 peer = 'connect://192.168.30.2:14550'  # outgoing connection
