@@ -21,26 +21,11 @@ jobs:
     before_script:
     - mkdir -p lib
     - pushd lib
-    - git clone https://github.com/tlsa/libcyaml.git
-    - pushd libcyaml
-    - git checkout v0.1.0
-    - popd
-    - git clone https://github.com/jbeder/yaml-cpp.git
-    - pushd yaml-cpp
-    - git checkout yaml-cpp-0.6.2
-    - popd
-    - git clone https://github.com/gabime/spdlog.git
-    - pushd spdlog
-    - git checkout v1.3.1
-    - popd
-    - git clone https://github.com/jarro2783/cxxopts.git
-    - pushd cxxopts
-    - git checkout v2.2.0
-    - popd
-    - git clone https://github.com/aircrack-ng/rtl8812au.git
-    - pushd rtl8812au
-    - git checkout v5.2.20
-    - popd
+    - git clone https://github.com/tlsa/libcyaml.git -b v0.1.0
+    - git clone https://github.com/jbeder/yaml-cpp.git -b yaml-cpp-0.6.2
+    - git clone https://github.com/gabime/spdlog.git -b v1.3.1
+    - git clone https://github.com/jarro2783/cxxopts.git -b v2.2.0
+    - git clone https://github.com/aircrack-ng/rtl8812au.git -b v5.2.20
     - git clone https://github.com/CopterExpress/libseek-thermal.git
     - git clone https://github.com/cedricve/raspicam.git
     - git clone https://${GITHUB_USER}:${GITHUB_OAUTH_TOKEN}@github.com/CopterExpress/mavlink-fast-switch.git
@@ -63,10 +48,7 @@ jobs:
     - git remote set-url origin https://github.com/CopterExpress/duocam-camera.git
     - git submodule update --init --recursive
     - popd
-    - git clone https://github.com/svpcom/wifibroadcast.git
-    - pushd wifibroadcast
-    - git checkout wifibroadcast-19.06
-    - popd
+    - git clone https://github.com/CopterExpress/wifibroadcast -b pr-mavlink_aggregation 
     - popd
     - pwd
     - docker pull ${DOCKER}
