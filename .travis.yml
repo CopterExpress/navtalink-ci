@@ -48,7 +48,7 @@ jobs:
     - git remote set-url origin https://github.com/CopterExpress/duocam-camera.git
     - git submodule update --init --recursive
     - popd
-    - git clone https://github.com/CopterExpress/wifibroadcast -b pr-mavlink_aggregation 
+    - git clone https://github.com/CopterExpress/wifibroadcast 
     - popd
     - pwd
     - docker pull ${DOCKER}
