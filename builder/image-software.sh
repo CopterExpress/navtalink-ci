@@ -54,12 +54,16 @@ my_travis_retry() {
   return $result
 }
 
+echo "deb http://deb.coex.tech/navtalink buster main" > /etc/apt/sources.list.d/navtalink-latest.list \
+&& curl http://deb.coex.tech/aptly_repo_signing.key 2> /dev/null | apt-key add - \
+|| (echo_stamp "Failed to add NavTALink repository!" "ERROR"; exit 1)
+
 echo_stamp "Update apt"
 apt-get update
 #&& apt upgrade -y
 
 echo_stamp "Upgrade kernel"
-apt-get install -y --only-upgrade raspberrypi-kernel raspberrypi-bootloader \
+apt-get install -y --only-upgrade raspberrypi-kernel=1.20190925+1-1 raspberrypi-bootloader=1.20190925+1-1 \
 || (echo_stamp "Failed to upgrade kernel!" "ERROR"; exit 1)
 
 echo_stamp "Software installing"
@@ -119,6 +123,7 @@ python-future \
 python-configparser \
 python-all \
 libyaml-dev \
+realtek-rtl88xxau-modules-4.19.75-v7+ \
 && echo_stamp "Everything was installed!" "SUCCESS" \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
@@ -265,49 +270,11 @@ cd /home/pi/wifibroadcast \
 && sed -i "s/^\(WFB_NICS=\"\).*$/\1\"/" /etc/default/wifibroadcast \
 || (echo_stamp "Failed to build wifibroadcast!" "ERROR"; exit 1)
 
-# ./dkms-install.sh fails in chroot environment. We have to perform build and install
-# steps manually with kernels installed in the target system.
-echo_stamp "Build rtl8812au"
-cd /home/pi/rtl8812au && \
-git status
-
-DRV_DIR=$(grep -Po "DRV_DIR=\K([a-z0-9]+)" ./dkms-install.sh) \
-|| (echo_stamp "Failed to extract DRV_DIR!" "ERROR"; exit 1)
-echo "DRV_DIR=$DRV_DIR"
-
-DRV_NAME=$(grep -Po "DRV_NAME=\K([a-z0-9]+)" ./dkms-install.sh) \
-|| (echo_stamp "Failed to extract DRV_NAME!" "ERROR"; exit 1)
-echo "DRV_NAME=$DRV_NAME"
-
-DRV_VERSION=$(grep -Po "DRV_VERSION=\K([0-9.]+)" ./dkms-install.sh) \
-|| (echo_stamp "Failed to extract DRV_VERSION!" "ERROR"; exit 1)
-echo "DRV_VERSION=$DRV_VERSION"
-
-cp -r $(pwd) /usr/src/${DRV_NAME}-${DRV_VERSION} \
-|| (echo_stamp "Failed to create a symlink for the rtl8812au DKMS module!" "ERROR"; exit 1)
-
-dkms add -m ${DRV_NAME} -v ${DRV_VERSION} \
-|| (echo_stamp "Failed to add the rtl8812au DKMS module!" "ERROR"; exit 1)
-
-linux_headers=($(ls -1a /usr/src | grep -Po "linux-headers-\K([a-z0-9.=+-]+)")) \
-|| (echo_stamp "Failed to retrieve target system kernels!" "ERROR"; exit 1)
-for i in "${linux_headers[@]}"
-do
-  dkms build -m ${DRV_NAME} -v ${DRV_VERSION} -k "$i" \
-  || (echo_stamp "Failed to build rtl8812au for kernel $i!" "ERROR"; exit 1)
-  dkms install -m ${DRV_NAME} -v ${DRV_VERSION} -k "$i" \
-  || (echo_stamp "Failed to install rtl8812au for kernel $i!" "ERROR"; exit 1)
-done
-
 cat << EOF >> /etc/sysctl.conf
 net.ipv6.conf.all.disable_ipv6 = 1
 net.ipv6.conf.default.disable_ipv6 = 1
 net.ipv6.conf.lo.disable_ipv6 = 1
 EOF
-
-cd .. \
-&& rm -r rtl8812au \
-|| (echo_stamp "Failed to remove rtl8812au sources!" "ERROR"; exit 1)
 
 echo_stamp "Reconfigure shared objects"
 ldconfig \
