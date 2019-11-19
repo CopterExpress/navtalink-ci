@@ -122,7 +122,8 @@ python-pyroute2 \
 python-future \
 python-configparser \
 python-all \
-libyaml-dev \
+libyaml-cpp-dev \
+libspdlog-dev \
 realtek-rtl88xxau-modules-4.19.75-v7+ \
 && echo_stamp "Everything was installed!" "SUCCESS" \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
@@ -159,30 +160,6 @@ cd /home/pi/libcyaml \
 && cd .. \
 && rm -r libcyaml \
 || (echo_stamp "Failed to build libcyaml!" "ERROR"; exit 1)
-
-echo_stamp "Build spdlog"
-cd /home/pi/spdlog \
-&& git status \
-&& mkdir build \
-&& cd build \
-&& cmake -DSPDLOG_BUILD_BENCH=OFF -DSPDLOG_BUILD_TESTS=OFF .. \
-&& make -j4 \
-&& make install \
-&& cd ../.. \
-&& rm -r spdlog \
-|| (echo_stamp "Failed to build spdlog!" "ERROR"; exit 1)
-
-echo_stamp "Build yaml-cpp"
-cd /home/pi/yaml-cpp \
-&& git status \
-&& mkdir build \
-&& cd build \
-&& cmake -DYAML_CPP_BUILD_TESTS=OFF .. \
-&& make -j4 \
-&& make install \
-&& cd ../.. \
-&& rm -r yaml-cpp \
-|| (echo_stamp "Failed to build yaml-cpp!" "ERROR"; exit 1)
 
 echo_stamp "Build cxxopts"
 cd /home/pi/cxxopts \
