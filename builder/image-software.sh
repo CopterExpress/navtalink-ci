@@ -123,6 +123,8 @@ python-future \
 python-configparser \
 python-all \
 libyaml-cpp-dev \
+libyaml-dev \
+usbmount=0.0.24 \
 libspdlog-dev \
 realtek-rtl88xxau-modules-4.19.75-v7+ \
 && echo_stamp "Everything was installed!" "SUCCESS" \
@@ -144,13 +146,6 @@ rm get-pip.py
 
 echo_stamp "Make sure both pip is installed"
 pip --version
-
-echo_stamp "Install usbmount"
-cd /home/pi \
-&& wget https://github.com/nicokaiser/usbmount/releases/download/0.0.24/usbmount_0.0.24_all.deb \
-&& apt install --no-install-recommends -y ./usbmount_0.0.24_all.deb \
-&& rm ./usbmount_0.0.24_all.deb \
-|| (echo_stamp "Failed to install usbmount pymavlink!" "ERROR"; exit 1)
 
 echo_stamp "Build libcyaml"
 cd /home/pi/libcyaml \
