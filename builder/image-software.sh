@@ -126,7 +126,7 @@ libyaml-cpp-dev \
 libyaml-dev \
 usbmount=0.0.24 \
 libspdlog-dev \
-realtek-rtl88xxau-modules-4.19.75-v7+ \
+realtek-rtl88xxau-modules-4.19.75-v7l+ \
 && echo_stamp "Everything was installed!" "SUCCESS" \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
