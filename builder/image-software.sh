@@ -63,7 +63,7 @@ apt-get update
 #&& apt upgrade -y
 
 echo_stamp "Upgrade kernel"
-apt-get install -y --only-upgrade raspberrypi-kernel=1.20190925+1-1 raspberrypi-bootloader=1.20190925+1-1 \
+apt-get install -y --only-upgrade raspberrypi-kernel=1.20200212-1 raspberrypi-bootloader=1.20200212-1 \
 || (echo_stamp "Failed to upgrade kernel!" "ERROR"; exit 1)
 
 echo_stamp "Software installing"
@@ -126,7 +126,8 @@ libyaml-cpp-dev \
 libyaml-dev \
 usbmount=0.0.24 \
 libspdlog-dev \
-realtek-rtl88xxau-modules-4.19.75-v7l+ \
+realtek-rtl88xxau-modules-4.19.97-v7 \
+realtek-rtl88xxau-modules-4.19.97-v7l+ \
 && echo_stamp "Everything was installed!" "SUCCESS" \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
